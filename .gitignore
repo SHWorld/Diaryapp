@@ -1,0 +1,38 @@
+# 🚀 Python / Django 関連 (Backend)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+.env
+config.json
+secrets.json
+
+# Djangoのマイグレーションキャッシュ
+backend/api/migrations/__pycache__/
+
+# 🚀 仮想環境
+venv/
+
+# 🚀 React / Node.js 関連 (Frontend)
+node_modules/
+frontend/build/
+dist/
+.yarn/
+.pnp.cjs
+.pnp.loader.mjs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# 🛠️ VS Code や JetBrains (PyCharm, WebStorm) の設定ファイル
+.vscode/
+.idea/
+*.iml
+
+# 🛠️ OS の不要ファイル
+.DS_Store
+Thumbs.db
