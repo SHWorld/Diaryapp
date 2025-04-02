@@ -1,37 +1,76 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Grid, Box, Button, Image, Text, Heading } from "@chakra-ui/react";
 
-function DiaryList({ pages, setEditingPage, deletePage }) {
-  const handleEdit = (page) => {
-    setEditingPage(page);
-  };
+function DiaryList({ pages, deletePage }) {
+  const navigate = useNavigate();
+
   return (
-    <div>
-      <h2>ページ一覧</h2>
+    <Box p={4}>
+      <Text fontSize="2xl" fontWeight="bold" mb={4}>
+        ページ一覧
+      </Text>
       {pages.length === 0 ? (
-        <p>日記はありません</p>
+        <Text textAlign="center">日記はありません</Text>
       ) : (
-        <ul>
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+          }}
+          gap={6}
+        >
           {pages.map((page) => (
-            <li key={page.id}>
-              <p>タイトル：{page.title}</p>
-              <p>本文: {page.body}</p>
-              <p>日付: {page.page_date}</p>
-              <button onClick={() => handleEdit(page)}>編集</button>
-              <button
+            <Box
+              key={page.id}
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              p={4}
+              boxShadow="md"
+              bg="white"
+            >
+              <Heading as="h3" size="md" mb={2} textAlign="center">
+                {page.title}
+              </Heading>
+              <Text noOfLines={3} mb={2} textAlign="center">
+                {page.body}
+              </Text>
+              {page.image && (
+                <Image
+                  src={page.image}
+                  alt="投稿画像"
+                  boxSize="150px"
+                  objectFit="cover"
+                  mb={2}
+                />
+              )}
+              <Text mb={2}>{page.page_date}</Text>
+              <Button
+                colorScheme="blue"
+                size="sm"
+                onClick={() => navigate(`/diary/edit/${page.id}`)}
+                mr={2}
+              >
+                編集
+              </Button>
+              <Button
+                colorScheme="red"
+                size="sm"
                 onClick={() => {
                   if (window.confirm("本当に削除しますか？")) {
-                    // ✅ 削除前の確認
                     deletePage(page.id);
                   }
                 }}
               >
                 削除
-              </button>
-            </li>
+              </Button>
+            </Box>
           ))}
-        </ul>
+        </Grid>
       )}
-    </div>
+    </Box>
   );
 }
 

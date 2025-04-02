@@ -36,3 +36,6 @@ yarn-error.log
 # 🛠️ OS の不要ファイル
 .DS_Store
 Thumbs.db
+
+
+test/
